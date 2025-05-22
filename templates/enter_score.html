@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nhập Điểm - Poly Center</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="/static/css/style.css">
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar" id="navbar">
+        <div class="logo"><span>Poly </span>Center</div>
+        <ul class="nav-links" id="navLinks">
+            <li><a href="index.html">Trang Chủ</a></li>
+            <li class="dropdown">
+                <a href="#">Giới thiệu ▾</a>
+                <ul class="dropdown-content">
+                    <li><a href="tamnhin_sumenh.html">Tầm nhìn & Sứ mệnh</a></li>
+                    <li><a href="cosovatchat.html">Cơ sở vật chất</a></li>
+                    <li><a href="doingugiaovien.html">Đội ngũ giáo viên</a></li>
+                </ul>
+            </li>
+            <li><a href="khoahoc.html">Khóa Học</a></li>
+            <li class="dropdown">
+                <a href="#">Học Viên ▾</a>
+                <ul class="dropdown-content">
+                    <li><a href="tailieuhoc.html">Tài liệu học</a></li>
+                    <li><a href="lichhoccuatoi.html">Lịch học của tôi</a></li>
+                    <li><a href="view_score.html">Kết quả học tập</a></li>
+                    <li><a href="xinphepvang.html">Báo vắng</a></li>
+                </ul>
+            </li>
+            <li class="dropdown">
+                <a href="#">Giáo Viên ▾</a>
+                <ul class="dropdown-content">
+                    <li><a href="quanlilophoc.html">Quản lý lớp</a></li>
+                    <li><a href="uploadtailieu.html">Upload tài liệu</a></li>
+                    <li><a href="lichday.html">Lịch dạy</a></li>
+                    <li><a href="enter_score.html">Nhập điểm</a></li>
+                </ul>
+            </li>
+            <li><a href="register.html">Đăng Ký</a></li>
+            <li><a href="#">Liên Hệ</a></li>
+            <li><a href="login.html">Đăng Nhập</a></li>
+        </ul>
+        <div class="burger" onclick="toggleMenu()">
+            <div class="line1"></div>
+            <div class="line2"></div>
+            <div class="line3"></div>
+        </div>
+    </nav>
+
+    <div class="container mx-auto p-6">
+        <h1 class="text-2xl font-bold mb-6">Nhập Điểm</h1>
+        
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+                {% for category, message in messages %}
+                    <div class="bg-{{ 'green' if category == 'success' else 'red' }}-100 border-{{ 'green' if category == 'success' else 'red' }}-400 text-{{ 'green' if category == 'success' else 'red' }}-700 px-4 py-3 rounded mb-4">
+                        {{ message }}
+                    </div>
+                {% endfor %}
+            {% endif %}
+        {% endwith %}
+
+        <form method="POST" action="{{ url_for('enter_score') }}" class="bg-white p-6 rounded shadow-md">
+            <div class="mb-4">
+                <label for="class_id" class="block text-sm font-medium text-gray-700">Chọn Lớp</label>
+                <select name="class_id" id="class_id" class="mt-1 block w-full border-gray-300 rounded-md shadow-sm" onchange="this.form.submit()" required>
+                    <option value="">-- Chọn một lớp --</option>
+                    {% for class_ in classes %}
+                        <option value="{{ class_.id }}" {% if class_id == class_.id|string %}selected{% endif %}>{{ class_.name }} (Khóa học: {{ class_.course.name }})</option>
+                    {% endfor %}
+                </select>
+            </div>
+
+            {% if students %}
+                <div class="mb-4">
+                    <label for="student_id" class="block text-sm font-medium text-gray-700">Chọn Học Viên</label>
+                    <select name="student_id" id="student_id" class="mt-1 block w-full border-gray-300 rounded-md shadow-sm" required>
+                        <option value="">-- Chọn một học viên --</option>
+                        {% for student in students %}
+                            <option value="{{ student.id }}">{{ student.name }} ({{ student.email }})</option>
+                        {% endfor %}
+                    </select>
+                </div>
+
+                <div class="mb-4">
+                    <label for="course_id" class="block text-sm font-medium text-gray-700">Chọn Khóa Học</label>
+                    <select name="course_id" id="course_id" class="mt-1 block w-full border-gray-300 rounded-md shadow-sm" required>
+                        <option value="">-- Chọn một khóa học --</option>
+                        {% for course in courses %}
+                            <option value="{{ course.id }}">{{ course.name }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+
+                <div class="mb-4">
+                    <label for="score" class="block text-sm font-medium text-gray-700">Điểm</label>
+                    <input type="number" name="score" id="score" step="0.1" min="0" max="10" class="mt-1 block w-full border-gray-300 rounded-md shadow-sm" required>
+                </div>
+
+                <div class="mb-4">
+                    <label for="test_date" class="block text-sm font-medium text-gray-700">Ngày Kiểm Tra</label>
+                    <input type="date" name="test_date" id="test_date" class="mt-1 block w-full border-gray-300 rounded-md shadow-sm" value="{{ today }}" required>
+                </div>
+
+                <button type="submit" name="submit_score" class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600">Gửi Điểm</button>
+            {% else %}
+                <p class="text-gray-600">Không có học viên nào trong lớp học đã chọn.</p>
+            {% endif %}
+        </form>
+    </div>
+
+    <script>
+        function toggleMenu() {
+            const navLinks = document.getElementById('navLinks');
+            navLinks.classList.toggle('active');
+        }
+    </script>
+</body>
+</html>

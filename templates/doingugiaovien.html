@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Đội Ngũ Giáo Viên - Poly Center</title>
+  <link rel="stylesheet" href="/static/css/cosovatchat.css">
+  <link rel="stylesheet" href="/static/css/doingugiaovien.css">
+  <link rel="stylesheet" href="/static/css/style.css">
+  <link rel="stylesheet" href="/static/css/footer.css">
+</head>
+<body>
+
+<!-- Navbar (Unchanged) -->
+<nav class="navbar" id="navbar">
+  <div class="logo"><span>Poly </span>Center</div>
+  <ul class="nav-links" id="navLinks">
+    <li><a href="index.html">Trang Chủ</a></li>
+    <li class="dropdown">
+      <a href="#">Giới thiệu ▾</a>
+      <ul class="dropdown-content">
+        <li><a href="tamnhin_sumenh.html">Tầm nhìn & Sứ mệnh</a></li>
+        <li><a href="cosovatchat.html">Cơ sở vật chất</a></li>
+        <li><a href="doingugiaovien.html">Đội ngũ giáo viên</a></li>
+      </ul>
+    </li>
+    <li><a href="khoahoc.html">Khóa Học</a></li>
+    <li class="dropdown">
+      <a href="#">Học Viên ▾</a>
+      <ul class="dropdown-content">
+        <li><a href="tailieuhoc.html">Tài liệu học</a></li>
+        <li><a href="lichhoccuatoi.html">Lịch học của tôi</a></li>
+        <li><a href="view_score.html">Kết quả học tập</a></li>
+        <li><a href="xinphepvang.html">Báo vắng</a></li>
+      </ul>
+    </li>
+    <li class="dropdown">
+      <a href="#">Giáo Viên ▾</a>
+      <ul class="dropdown-content">
+        <li><a href="quanlilophoc.html">Quản lý lớp</a></li>
+        <li><a href="uploadtailieu.html">Upload tài liệu</a></li>
+        <li><a href="lichday.html">Lịch dạy</a></li>
+        <li><a href="enter_score.html">Nhập điểm</a></li>
+      </ul>
+    </li>
+    <li><a href="register.html">Đăng Ký</a></li>
+    <li><a href="#">Liên Hệ</a></li>
+    <li><a href="login.html">Đăng Nhập</a></li>
+  </ul>
+  <div class="burger" onclick="toggleMenu()">
+    <div class="line1"></div>
+    <div class="line2"></div>
+    <div class="line3"></div>
+  </div>
+</nav>
+
+<!-- Nội dung chính: Đội Ngũ Giáo Viên -->
+<section class="teachers">
+  <div class="content-container">
+    <h1>Đội Ngũ Giáo Viên</h1>
+    <div id="teacher-list">
+      <!-- Sample Teacher 1 -->
+      <div class="teacher-section">
+        <div class="teacher-image">
+          <img src="/static/images/co1.jpg" alt="Cô Anna">
+        </div>
+        <div class="teacher-text">
+          <h2>Cô Anna</h2>
+          <p>Thạc sĩ Ngôn ngữ học với hơn 10 năm kinh nghiệm giảng dạy tiếng Nhật. Chuyên gia về luyện thi Nhật ngữ và giao tiếp thực tế, được học viên đánh giá cao vì phương pháp giảng dạy sáng tạo và tận tâm.</p>
+        </div>
+      </div>
+      <!-- Sample Teacher 2 -->
+      <div class="teacher-section">
+        <div class="teacher-image">
+          <img src="/static/images/thay1.jpg" alt="Thầy Billy">
+        </div>
+        <div class="teacher-text">
+          <h2>Thầy Billy</h2>
+          <p>Tiếng Pháp giao tiếp cơ bản.</p>
+        </div>
+      </div>
+      <!-- Sample Teacher 3 -->
+      <div class="teacher-section">
+        <div class="teacher-image">
+          <img src="/static/images/co2.png" alt="Cô Tyni">
+        </div>
+        <div class="teacher-text">
+          <h2>Cô Tyni</h2>
+          <p>Tiếng Trung</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+function toggleMenu() {
+  var navLinks = document.getElementById('navLinks');
+  navLinks.classList.toggle('active');
+}
+
+// Load hardcoded teachers (for frontend development)
+function loadTeachers() {
+  const teachers = [
+    {
+      name: "Cô Anna",
+      description: "Thạc sĩ Ngôn ngữ học với hơn 10 năm kinh nghiệm giảng dạy tiếng Nhật. Chuyên gia về luyện thi Nhật ngữ và giao tiếp thực tế, được học viên đánh giá cao vì phương pháp giảng dạy sáng tạo và tận tâm.",
+      image: "/static/images/co1.jpg"
+    },
+    {
+      name: "Thầy Billy",
+      description: "Tiếng Pháp giao tiếp cơ bản",
+      image: "/static/images/thay1.jpg"
+    },
+    {
+      name: "Cô Tyni",
+      description: "Tiếng Trung",
+      image: "/static/images/co2.png"
+    }
+  ];
+
+  const teacherList = document.getElementById('teacher-list');
+  teacherList.innerHTML = ''; // Clear existing content
+  teachers.forEach(teacher => {
+    const teacherSection = document.createElement('div');
+    teacherSection.className = 'teacher-section';
+    teacherSection.innerHTML = `
+      <div class="teacher-image">
+        <img src="${teacher.image}" alt="${teacher.name}">
+      </div>
+      <div class="teacher-text">
+        <h2>${teacher.name}</h2>
+        <p>${teacher.description}</p>
+      </div>
+    `;
+    teacherList.appendChild(teacherSection);
+  });
+}
+
+// Load teachers when the page loads
+document.addEventListener('DOMContentLoaded', loadTeachers);
+</script>
+
+<!-- Phần chân trang -->
+<footer>
+  <div class="container">
+    <div class="footer-content">
+      <div class="footer-column">
+        <div class="footer-logo">
+          <span class="poly-color">Poly</span> Center
+        </div>
+        <p>Future in Language</p>
+        <div class="social-icons">
+          <a href="#"><i class="fab fa-facebook-f"></i></a>
+          <a href="#"><i class="fab fa-youtube"></i></a>
+          <a href="#"><i class="fab fa-instagram"></i></a>
+          <a href="#"><i class="fab fa-tiktok"></i></a>
+        </div>
+      </div>
+      
+      <div class="footer-column">
+        <h3>Liên kết nhanh</h3>
+        <ul>
+          <li><a href="index.html">Trang chủ</a></li>
+          <li><a href="tamnhin_sumenh.html">Giới thiệu</a></li>
+          <li><a href="courses.html">Khóa học</a></li>
+          <li><a href="#">Lịch học</a></li>
+          <li><a href="register.html">Đăng ký</a></li>
+        </ul>
+      </div>
+      
+      <div class="footer-column">
+        <h3>Khóa học</h3>
+        <ul>
+          <li><a href="#">Tiếng Anh Giao Tiếp</a></li>
+          <li><a href="#">Tiếng Anh Thiếu Nhi</a></li>
+          <li><a href="#">Tiếng Anh IELTS</a></li>
+          <li><a href="#">Tiếng Nhật</a></li>
+          <li><a href="#">Tiếng Hàn</a></li>
+        </ul>
+      </div>
+      
+      <div class="footer-column">
+        <h3>Liên hệ</h3>
+        <ul class="contact-info">
+          <li><i class="fas fa-map-marker-alt"></i> 123 Đường ABC, Quận XYZ, TP.HCM</li>
+          <li><i class="fas fa-phone"></i> 0123 456 789</li>
+          <li><i class="fas fa-envelope"></i> info@polycenter.edu.vn</li>
+          <li><i class="fas fa-clock"></i> T2-T6: 8:00 - 20:00, T7-CN: 8:00 - 17:00</li>
+        </ul>
+      </div>
+    </div>
+    
+    <div class="copyright">
+      <p>&copy; 2025 Poly Center. Tất cả quyền được bảo lưu.</p>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
