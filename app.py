@@ -10,11 +10,11 @@ import jwt
 import os
 
 app = Flask(__name__)
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///data.db'
+app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+pymysql://user:Ad%40123456789@polydata.mysql.database.azure.com/polydata?ssl=true'
 app.secret_key = 'super-secret-key'
 app.config['JWT_SECRET_KEY'] = 'jwt-secret-key'  # Khóa bí mật cho JWT
 db.init_app(app)
-CORS(app, supports_credentials=True, origins=["http://127.0.0.1:5500"])  # Cho phép gọi từ frontend
+CORS(app, supports_credentials=True, origins=["http://127.0.0.1:5500","http://40.81.20.234:5000"])  # Cho phép gọi từ frontend
 
 # Hàm tạo token JWT
 def create_token(user_id, role):
