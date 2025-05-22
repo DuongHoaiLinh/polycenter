@@ -10,14 +10,7 @@ import jwt
 import os
 
 app = Flask(__name__)
-app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+pymysql://user:Ad%40123456789@polydata.mysql.database.azure.com/polydata'
-app.config['SQLALCHEMY_ENGINE_OPTIONS'] = {
-    "connect_args": {
-        "ssl": {
-            "ca": "app_key.pem"
-        }
-    }
-}
+app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///data.db'
 app.secret_key = 'super-secret-key'
 app.config['JWT_SECRET_KEY'] = 'jwt-secret-key'  # Khóa bí mật cho JWT
 db.init_app(app)
