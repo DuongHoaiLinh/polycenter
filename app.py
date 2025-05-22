@@ -412,7 +412,10 @@ def home():
 
 @app.route('/<page>')
 def load_page(page):
-    return render_template(page)
+    if page.endswith('.html'):
+        return render_template(page)
+    else:
+        return "File không hợp lệ", 404
 
 if __name__ == '__main__':
     app.run(host="0.0.0.0", port=5000, debug=True)
