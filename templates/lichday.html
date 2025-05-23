@@ -140,7 +140,7 @@
   // Kiểm tra xác thực
   async function checkAuthentication() {
     try {
-      const url = "http://127.0.0.1:5000/api/verify-auth";
+      const url = "http://40.81.20.234:5000/api/verify-auth";
       
       const response = await fetch(url, {
         method: 'GET',
@@ -192,7 +192,7 @@
   async function getTeacherInfo(teacherId) {
     try {
       console.log(teacherId);
-      const response = await fetch(`http://127.0.0.1:5000/api/teachers/${teacherId}`, {
+      const response = await fetch(`http://40.81.20.234:5000/api/teachers/${teacherId}`, {
         method: 'GET',
         headers: {
           'Content-Type': 'application/json',
