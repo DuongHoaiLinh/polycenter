@@ -152,7 +152,7 @@
   
   // Hàm đăng xuất
   function logout() {
-    fetch('http://127.0.0.1:5000/api/logout', {
+    fetch('http://40.81.20.234:5000/api/logout', {
       method: 'POST',
       credentials: 'include'
     })
@@ -198,7 +198,7 @@
       headers['Authorization'] = `Bearer ${authToken}`;
     }
     
-    fetch(`http://127.0.0.1:5000/api/student/${userId}/schedule`, {
+    fetch(`http://40.81.20.234:5000/api/student/${userId}/schedule`, {
       method: 'GET',
       headers: headers,
       credentials: 'include'
